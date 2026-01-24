@@ -21,6 +21,93 @@
     h1 {
       color: #38bdf8;
     }
+    .fb-fab {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      z-index: 900;
+      background: linear-gradient(45deg, #8b5cf6, #ec4899);
+      color: #fff;
+      border: none;
+      border-radius: 9999px;
+      padding: 12px 18px;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+    .fb-fab:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 2px;
+    }
+    @media (max-width:768px){
+      .fb-fab {
+        top: auto;
+        bottom: 20px;
+        transform: none;
+        right: 16px;
+      }
+    }
+    .fb-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 950;
+    }
+    .fb-modal.open { display: flex; }
+    .fb-card {
+      width: 90%;
+      max-width: 520px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      padding: 18px;
+      color: #e5e7eb;
+    }
+    .fb-title { font-size: 20px; margin-bottom: 10px; }
+    .fb-textarea {
+      width: 100%;
+      min-height: 120px;
+      resize: vertical;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #e5e7eb;
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .fb-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .fb-submit {
+      background: linear-gradient(45deg, #8b5cf6, #ec4899);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .fb-close {
+      background: rgba(255,255,255,0.08);
+      color: #e5e7eb;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .fb-message { margin-top: 10px; }
+    .fb-error { color: #ef4444; margin-top: 8px; }
   </style>
 </head>
 <body>
@@ -29,5 +116,54 @@
     <p>No internet connection detected.</p>
     <p>Please check your connection. This page will update automatically once you’re back online.</p>
   </div>
+  <button id="fbButton" class="fb-fab" type="button" aria-label="Open feedback form">Feedback</button>
+  <div id="fbModal" class="fb-modal" role="dialog" aria-modal="true" aria-labelledby="fbTitle">
+    <div class="fb-card">
+      <div class="fb-title" id="fbTitle">Send Feedback</div>
+      <form id="fbForm" novalidate>
+        <textarea id="fbText" class="fb-textarea" required aria-required="true" aria-label="Your feedback"></textarea>
+        <div class="fb-error" id="fbError" style="display:none">Please enter your feedback.</div>
+        <div class="fb-actions">
+          <button type="submit" class="fb-submit" id="fbSubmit">Submit</button>
+          <button type="button" class="fb-close" id="fbClose">Close</button>
+        </div>
+        <div class="fb-message" id="fbMessage" style="display:none">Thank you for your feedback!</div>
+      </form>
+    </div>
+  </div>
+  <script>
+    (function(){
+      var feedbackBtn = document.getElementById('fbButton');
+      var modal = document.getElementById('fbModal');
+      var form = document.getElementById('fbForm');
+      var textarea = document.getElementById('fbText');
+      var error = document.getElementById('fbError');
+      var message = document.getElementById('fbMessage');
+      var submitBtn = document.getElementById('fbSubmit');
+      var closeBtn = document.getElementById('fbClose');
+      var homeUrl = "{% url 'home' %}";
+      function openModal(){ modal.classList.add('open'); textarea.focus(); }
+      function closeModal(){ modal.classList.remove('open'); }
+      feedbackBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e){ if(e.target===modal) closeModal(); });
+      document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var value = textarea.value.trim();
+        if(!value){
+          error.style.display='block';
+          textarea.focus();
+          return;
+        }
+        error.style.display='none';
+        textarea.disabled = true;
+        submitBtn.disabled = true;
+        closeBtn.disabled = true;
+        message.style.display='block';
+        setTimeout(function(){ window.location.href = homeUrl; }, 3000);
+      });
+    })();
+  </script>
 </body>
 </html>
