@@ -397,6 +397,55 @@
     </script>
     <link rel="stylesheet" href="{% static 'cursor-trail.css' %}">
     <script src="{% static 'scripts/cursor-trail.js' %}"></script>
+    <button id="feedbackButton" class="feedback-fab" type="button" aria-label="Open feedback form">Feedback</button>
+<div id="feedbackModal" class="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+  <div class="feedback-card">
+    <div class="feedback-title" id="feedbackTitle">Send Feedback</div>
+    <form id="feedbackForm" novalidate>
+      <textarea id="feedbackText" class="feedback-textarea" required aria-required="true" aria-label="Your feedback"></textarea>
+      <div class="feedback-error" id="feedbackError" style="display:none">Please enter your feedback.</div>
+      <div class="feedback-actions">
+        <button type="submit" class="feedback-submit" id="feedbackSubmit">Submit</button>
+        <button type="button" class="feedback-close" id="feedbackClose">Close</button>
+      </div>
+      <div class="feedback-message" id="feedbackMessage" style="display:none">Thank you for your feedback!</div>
+    </form>
+  </div>
+</div>
+<script>
+  (function(){
+    var feedbackBtn = document.getElementById('feedbackButton');
+    var modal = document.getElementById('feedbackModal');
+    var form = document.getElementById('feedbackForm');
+    var textarea = document.getElementById('feedbackText');
+    var error = document.getElementById('feedbackError');
+    var message = document.getElementById('feedbackMessage');
+    var submitBtn = document.getElementById('feedbackSubmit');
+    var closeBtn = document.getElementById('feedbackClose');
+    var homeUrl = "{% url 'home' %}";
+    function openModal(){ modal.classList.add('open'); textarea.focus(); }
+    function closeModal(){ modal.classList.remove('open'); }
+    feedbackBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){ if(e.target===modal) closeModal(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var value = textarea.value.trim();
+      if(!value){
+        error.style.display='block';
+        textarea.focus();
+        return;
+      }
+      error.style.display='none';
+      textarea.disabled = true;
+      submitBtn.disabled = true;
+      closeBtn.disabled = true;
+      message.style.display='block';
+      setTimeout(function(){ window.location.href = homeUrl; }, 3000);
+    });
+  })();
+</script>
 
 </body>
 
