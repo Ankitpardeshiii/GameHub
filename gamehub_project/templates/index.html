@@ -91,53 +91,71 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 glass-nav backdrop-blur-lg bg-black/20 border-b border-white/10 animate__animated animate__fadeInDown">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center space-x-8">
+    <nav class="fixed left-0 lg:left-48 top-0 lg:top-4 z-50 w-full lg:w-3/4 mx-auto px-0 lg:px-4 backdrop-blur-lg bg-black/20 border-b border-white/10 lg:rounded-full animate__animated animate__fadeInDown">
+        <div class="mx-auto px-4">
+            <div class="flex items-center justify-between h-16 w-full overflow-hidden">
 
-                    <!-- ⭐ UPDATED CLICKABLE LOGO + TEXT ⭐ -->
-                    <a href="{% url 'home' %}" class="flex items-center space-x-2 cursor-pointer">
-                        <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-gamepad text-white text-sm"></i>
-                        </div>
-                        <span class="font-orbitron font-bold text-xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                            GameHub
-                        </span>
-                    </a>
-                    <!-- ⭐ END UPDATED PART ⭐ -->
-
-                    <div class="hidden md:flex space-x-6">
-                        <a href="#hero" class="nav-link">Home</a>
-                        <a href="#games" class="nav-link">Games</a>
-                        <a href="#reviews" class="nav-link">Reviews</a>
-                        <a href="#about" class="nav-link">About</a>
-                        <a href="{% url 'leaderboard' %}" class="nav-link">Leaderboard</a>
+                <!-- LEFT: Logo -->
+                <a href="{% url 'home' %}" class="flex items-center space-x-2 shrink-0">
+                    <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-gamepad text-white text-sm"></i>
                     </div>
+                    <span class="font-orbitron font-bold text-lg sm:text-xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        GameHub
+                    </span>
+                </a>
+
+                <!-- CENTER: Desktop Links -->
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="#hero" class="nav-link">Home</a>
+                    <a href="#games" class="nav-link">Games</a>
+                    <a href="#reviews" class="nav-link">Reviews</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="{% url 'leaderboard' %}" class="nav-link">Leaderboard</a>
                 </div>
 
-                <div class="flex items-center space-x-2 md:space-x-4">
-                    <div class="relative hidden sm:block">
+                <!-- RIGHT: Actions -->
+                <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
+
+                    <!-- Search (hidden on small screens to prevent overflow) -->
+                    <div class="relative hidden md:block">
                         <input type="text" id="searchInput" placeholder="Search games..." class="search-input" />
-                        <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <i class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                     </div>
 
                     {% if user.is_authenticated %}
-                    <span class="hidden md:inline text-purple-500 font-bold font-rajdhani">👋</span>
-                    <span class="hidden md:inline font-orbitron font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent text-sm lg:text-base">
-                        Hello, {{ user.first_name|default:user.username }}
+                    <span class="hidden lg:inline font-orbitron font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent text-sm">
+                        Hi, {{ user.first_name|default:user.username }}
                     </span>
-                    <a href="{% url 'logout' %}" class="neon-button secondary text-xs md:text-sm px-2 md:px-4">Logout</a>
+                    <a href="{% url 'logout' %}" class="neon-button secondary text-xs py-1 rounded-md hover:bg-gray-800 sm:text-sm px-3">
+                        Logout
+                    </a>
                     {% else %}
-                    <a href="{% url 'login' %}" class="neon-button secondary text-xs md:text-sm px-2 md:px-4">Login</a>
+                    <a href="{% url 'login' %}" class="neon-button secondary text-xs py-1 rounded-md hover:bg-gray-800 sm:text-sm px-3">
+                        Login
+                    </a>
                     {% endif %}
 
+                    <!-- Theme Toggle -->
                     <button id="themeToggle" class="theme-toggle">
-                        <i class="
-                        "></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="menuToggle" class="lg:hidden text-white text-xl">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
+            </div>
 
+            <div id="mobileMenu" class="hidden lg:hidden w-full mt-2">
+                <div class="flex flex-col gap-3 py-3 mb-1 rounded-xl">
+                    <a href="#hero" class="nav-link">Home</a>
+                    <a href="#games" class="nav-link">Games</a>
+                    <a href="#reviews" class="nav-link">Reviews</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="{% url 'leaderboard' %}" class="nav-link">Leaderboard</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -264,53 +282,51 @@
 
     <!-- About Section -->
     <section id="about" class="about-section">
-        <div class="container">
-            
+        <div class="container mx-auto px-4 py-12">
             <!-- Main Glass Card -->
-            <div class="glass-card about-card" data-aos="fade-up">
-                <div class="about-content">
+            <div class="glass-card about-card bg-black/40 rounded-3xl shadow-xl p-8 md:p-14 max-w-5xl mx-auto" data-aos="fade-up">
+                <div class="about-content flex flex-col md:flex-row gap-10 items-center">
                     <!-- Project Intro -->
-                    <div class="about-text">
-                        <h2>About GameHub</h2>
-                        <p>
+                    <div class="about-text flex-1 text-center md:text-left">
+                        <h2 class="font-orbitron text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">About GameHub</h2>
+                        <p class="font-rajdhani text-lg text-gray-300 mb-4">
                             GameHub is a next-generation browser gaming platform designed to bring premium gaming experiences directly to the web. 
                             Built as an open-source initiative, it aims to eliminate the barrier between players and fun—no downloads, no installations, just instant play.
                         </p>
-                        <p>
+                        <p class="font-rajdhani text-lg text-gray-400 mb-6">
                             Whether you are a casual gamer looking for a quick break or a competitive player climbing the leaderboards, GameHub offers a seamless experience across all devices.
                         </p>
+                        <!-- Call to Action / GitHub Link -->
+                        <div class="about-footer mt-6">
+                            <p class="font-rajdhani text-base text-gray-400 mb-2">Check out the code on GitHub</p>
+                            <a href="https://github.com/kaifansariw/GameHub" target="_blank" class="github-btn inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold shadow-lg hover:scale-105 transition-transform">
+                                <i class="fab fa-github text-xl"></i> View Repository
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Features Grid -->
-                    <div class="features-grid">
-                        <div class="feature-item">
-                            <i class="fas fa-bolt feature-icon"></i>
-                            <h3>Lightning Fast</h3>
-                            <p>Powered by optimized web technologies for instant load times and zero lag.</p>
+                    <div class="features-grid flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+                        <div class="feature-item flex flex-col items-center bg-gradient-to-br from-purple-900/60 to-pink-900/40 rounded-xl p-6 shadow-md hover:scale-105 transition-transform">
+                            <i class="fas fa-bolt feature-icon text-3xl text-yellow-400 mb-3 animate__animated animate__flash animate__infinite"></i>
+                            <h3 class="font-orbitron text-xl font-bold mb-2 text-purple-300">Lightning Fast</h3>
+                            <p class="font-rajdhani text-gray-300 text-center">Powered by optimized web technologies for instant load times and zero lag.</p>
                         </div>
-                        <div class="feature-item">
-                            <i class="fas fa-mobile-alt feature-icon"></i>
-                            <h3>Cross Platform</h3>
-                            <p>Responsive design that works perfectly on Desktop, Tablet, and Mobile.</p>
+                        <div class="feature-item flex flex-col items-center bg-gradient-to-br from-blue-900/60 to-indigo-900/40 rounded-xl p-6 shadow-md hover:scale-105 transition-transform">
+                            <i class="fas fa-mobile-alt feature-icon text-3xl text-pink-400 mb-3 animate__animated animate__pulse animate__infinite"></i>
+                            <h3 class="font-orbitron text-xl font-bold mb-2 text-pink-300">Cross Platform</h3>
+                            <p class="font-rajdhani text-gray-300 text-center">Responsive design that works perfectly on Desktop, Tablet, and Mobile.</p>
                         </div>
-                        <div class="feature-item">
-                            <i class="fas fa-trophy feature-icon"></i>
-                            <h3>Global Leaderboards</h3>
-                            <p>Track your high scores and compete with players from around the world.</p>
+                        <div class="feature-item flex flex-col items-center bg-gradient-to-br from-indigo-900/60 to-purple-900/40 rounded-xl p-6 shadow-md hover:scale-105 transition-transform">
+                            <i class="fas fa-trophy feature-icon text-3xl text-yellow-300 mb-3 animate__animated animate__tada animate__infinite"></i>
+                            <h3 class="font-orbitron text-xl text-center font-bold mb-2 text-yellow-200">Global Leaderboards</h3>
+                            <p class="font-rajdhani text-gray-300 text-center">Track your high scores and compete with players from around the world.</p>
                         </div>
-                        <div class="feature-item">
-                            <i class="fas fa-code feature-icon"></i>
-                            <h3>Modern Tech</h3>
-                            <p>Built with Django, HTML5, and CSS3 to demonstrate modern web capabilities.</p>
+                        <div class="feature-item flex flex-col items-center bg-gradient-to-br from-pink-900/60 to-purple-900/40 rounded-xl p-6 shadow-md hover:scale-105 transition-transform">
+                            <i class="fas fa-code feature-icon text-3xl text-blue-300 mb-3 animate__animated animate__fadeIn animate__infinite"></i>
+                            <h3 class="font-orbitron text-xl font-bold mb-2 text-blue-200">Modern Tech</h3>
+                            <p class="font-rajdhani text-gray-300 text-center">Built with Django, HTML5, and CSS3 to demonstrate modern web capabilities.</p>
                         </div>
-                    </div>
-
-                    <!-- Call to Action / GitHub Link -->
-                    <div class="about-footer">
-                        <p>Check out the code on GitHub</p>
-                        <a href="https://github.com/kaifansariw/GameHub" target="_blank" class="github-btn">
-                            <i class="fab fa-github"></i> View Repository
-                        </a>
                     </div>
                 </div>
             </div>
@@ -361,21 +377,32 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="{% static 'main.js' %}"></script>
+    <script>
+        // Duplicate theme toggle system - REMOVED to prevent conflicts
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggle = document.getElementById("menuToggle");
+            const menu = document.getElementById("mobileMenu");
 
-<script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker
-        .register("/static/sw.js")
-        .then(() => console.log("Service Worker Registered"))
-        .catch((err) =>
-          console.error("Service Worker registration failed:", err)
-        );
-    });
-  }
-</script>
-<link rel="stylesheet" href="{% static 'cursor-trail.css' %}">
-<script src="{% static 'scripts/cursor-trail.js' %}"></script>
+            if (!toggle || !menu) return;
+
+            toggle.addEventListener("click", () => {
+                menu.classList.toggle("hidden");
+            });
+        });
+
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+            navigator.serviceWorker
+                .register("/static/sw.js")
+                .then(() => console.log("Service Worker Registered"))
+                .catch((err) =>
+                console.error("Service Worker registration failed:", err)
+                );
+            });
+        }
+    </script>
+    <link rel="stylesheet" href="{% static 'cursor-trail.css' %}">
+    <script src="{% static 'scripts/cursor-trail.js' %}"></script>
 
 </body>
 
