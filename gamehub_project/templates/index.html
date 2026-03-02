@@ -138,6 +138,11 @@
                                 {{ user.first_name|default:user.username }}
                             </span>
                         </a>
+                        {% if user.is_staff %}
+                        <a href="{% url 'message_search' %}"
+                            class="neon-button primary text-xs md:text-sm px-2 md:px-4 ml-4"
+                            title="View user messages">Messages</a>
+                        {% endif %}
                         <a href="{% url 'logout' %}"
                             class="neon-button secondary text-xs md:text-sm px-2 md:px-4 ml-4">Logout</a>
                     </div>
@@ -470,10 +475,38 @@
                 error.style.display = 'none';
                 textarea.disabled = true;
                 submitBtn.disabled = true;
-                closeBtn.disabled = true;
-                message.style.display = 'block';
-                setTimeout(function () { window.location.href = homeUrl; }, 3000);
+
+                // --- NEW INTEGRATION ---
+                fetch("{% url 'send_feedback' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCSRFToken()
+                    },
+                    body: JSON.stringify({ content: value })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            message.textContent = data.message;
+                            message.style.display = 'block';
+                            setTimeout(function () { closeModal(); location.reload(); }, 2000);
+                        } else {
+                            error.textContent = data.message;
+                            error.style.display = 'block';
+                            textarea.disabled = false;
+                            submitBtn.disabled = false;
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Feedback error:", err);
+                        error.textContent = "Something went wrong. Please try again.";
+                        error.style.display = 'block';
+                        textarea.disabled = false;
+                        submitBtn.disabled = false;
+                    });
             });
+
         })();
     </script>
 

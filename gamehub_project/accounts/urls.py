@@ -10,5 +10,8 @@ urlpatterns = [
     path('add-play/', add_play, name='add_play'),
     path('save-score/', save_score, name='save_score'),
     path('profile/', profile_dashboard, name='profile'),
+    path('send-feedback/', views.send_feedback, name='send_feedback'),
+    path('messages/', views.message_search, name='message_search'),
 ]
+
 
