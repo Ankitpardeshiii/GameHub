@@ -1,15 +1,3 @@
-# 🎮 GameHub
- 
-[![HTML5](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-[![CSS3](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-[![JavaScript](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-[![Tailwind CSS](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-[![License: MIT](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-![GitHub Repo stars](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-![GitHub forks](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-![GitHub issues](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-
->
 ## Rules For ECWoC26
 - It is important to star the repo , otherwise your  contribution will not count.
 - You need to make a proper docs for the feature you are trying to implement and share it with me using docs in mail.
@@ -77,8 +65,7 @@ In an era of complex game engines and heavy frameworks, GameHub proves that amaz
 - Fast & Lightweight: Pure vanilla JS, zero frameworks
 - Score Persistence: Progress saved in LocalStorage
 - Real-time Search: Instantly filter and find games
-- Smooth Animations: https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip and https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip integration
-
+- Smooth Animations
 ***
 
 ## 🎮 Games
@@ -134,7 +121,7 @@ In an era of complex game engines and heavy frameworks, GameHub proves that amaz
 
 - **Frontend:** HTML5, CSS3, JavaScript
 - **Styling:** Tailwind CSS, DaisyUI
-- **Animations:** https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip, https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
+- **Animations:**
 - **Icons:** Font Awesome
 - **Storage:** LocalStorage API
 
@@ -153,8 +140,8 @@ Follow these steps to run the GameHub Django project locally:
 **1️⃣ Clone the Repository**
 
 ```bash
-git clone https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-cd GameHub
+git clone <YOUR_FORK_URL>
+cd <DIRECTORY_NAME>
 ```
 
 **2️⃣ Install Django**
@@ -164,9 +151,6 @@ pip install django
 ```
 
 **3️⃣ Navigate to the Project Folder**
-
-Move into the folder where https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip is located:
-
 ```bash
 cd gamehub_project
 ```
@@ -174,7 +158,7 @@ cd gamehub_project
 **4️⃣ Run the Development Server**
 
 ```bash
-python https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip runserver
+python 
 ```
 
 **5️⃣ Open in Browser**
