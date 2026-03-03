@@ -377,13 +377,13 @@ const games = [
     category: 'arcade'
   },
   {
-  id: "whack-a-mole",
-  title: "Whack-A-Mole",
-  description: "Whack the moles before time runs out",
-  image: "/static/assets/Whake-a-mole.png",
-  file: "/static/games/whack-a-mole.html",
-  category: "arcade"
-}
+    id: "whack-a-mole",
+    title: "Whack-A-Mole",
+    description: "Whack the moles before time runs out",
+    image: "/static/assets/Whake-a-mole.png",
+    file: "/static/games/whack-a-mole.html",
+    category: "arcade"
+  }
 ];
 
 // ============================================
@@ -397,24 +397,24 @@ const games = [
 function initializeTheme() {
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon = themeToggle?.querySelector("i");
-  
+
   // Check for saved theme preference or default to system preference
   let savedTheme = localStorage.getItem("theme");
-  
+
   // If no saved theme, detect system preference
   if (!savedTheme) {
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     savedTheme = prefersDark ? "dark" : "light";
   }
-  
+
   // Apply theme
-document.body.setAttribute("data-theme", savedTheme);
-  
+  document.body.setAttribute("data-theme", savedTheme);
+
   // Update icon
   if (themeIcon) {
     themeIcon.className = savedTheme === "dark" ? "fas fa-moon" : "fas fa-sun";
   }
-  
+
   // Log for debugging
   console.log(`🎨 Theme initialized: ${savedTheme}`);
 }
@@ -425,19 +425,19 @@ document.body.setAttribute("data-theme", savedTheme);
 function toggleTheme() {
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon = themeToggle?.querySelector("i");
-  
+
   // Get current theme
   const currentTheme = document.body.getAttribute("data-theme") || "dark";
   const newTheme = currentTheme === "dark" ? "light" : "dark";
-  
+
   // Apply new theme with smooth transition
   document.body.style.transition = "background-color 0.3s ease, color 0.3s ease";
   document.body.setAttribute("data-theme", newTheme);
 
-  
+
   // Save to localStorage
   localStorage.setItem("theme", newTheme);
-  
+
   // Update icon with rotation animation
   if (themeIcon) {
     themeIcon.style.transform = "rotate(360deg)";
@@ -446,7 +446,7 @@ function toggleTheme() {
       themeIcon.style.transform = "rotate(0deg)";
     }, 150);
   }
-  
+
   // Add scale animation to button
   if (themeToggle) {
     themeToggle.style.transform = "scale(0.8)";
@@ -454,10 +454,10 @@ function toggleTheme() {
       themeToggle.style.transform = "scale(1)";
     }, 150);
   }
-  
+
   // Show theme change notification (optional)
   showThemeNotification(newTheme);
-  
+
   console.log(`🎨 Theme changed to: ${newTheme}`);
 }
 
@@ -485,15 +485,15 @@ function showThemeNotification(theme) {
     transform: translateY(20px);
     transition: all 0.3s ease;
   `;
-  
+
   document.body.appendChild(notification);
-  
+
   // Animate in
   setTimeout(() => {
     notification.style.opacity = "1";
     notification.style.transform = "translateY(0)";
   }, 10);
-  
+
   // Remove after 2 seconds
   setTimeout(() => {
     notification.style.opacity = "0";
@@ -507,10 +507,10 @@ function showThemeNotification(theme) {
  */
 function setupThemeToggle() {
   const themeToggle = document.getElementById("themeToggle");
-  
+
   if (themeToggle) {
     themeToggle.addEventListener("click", toggleTheme);
-    
+
     // Add keyboard accessibility
     themeToggle.addEventListener("keypress", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -518,7 +518,7 @@ function setupThemeToggle() {
         toggleTheme();
       }
     });
-    
+
     // Make it focusable
     themeToggle.setAttribute("tabindex", "0");
     themeToggle.setAttribute("role", "button");
@@ -531,20 +531,20 @@ function setupThemeToggle() {
  */
 function setupSystemThemeListener() {
   const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  
+
   darkModeMediaQuery.addEventListener("change", (e) => {
     // Only auto-update if user hasn't manually set a preference
     const savedTheme = localStorage.getItem("theme");
     if (!savedTheme) {
       const newTheme = e.matches ? "dark" : "light";
       document.body.setAttribute("data-theme", newTheme);
-      
+
       const themeIcon = document.querySelector("#themeToggle i");
       if (themeIcon) {
         themeIcon.className = newTheme === "dark" ? "fas fa-moon" : "fas fa-sun";
       }
 
-      
+
       console.log(`🎨 System theme changed to: ${newTheme}`);
     }
   });
@@ -558,7 +558,7 @@ function setupSystemThemeListener() {
 function renderGames(gamesToRender = games) {
   const gamesGrid = document.getElementById("gamesGrid");
   if (!gamesGrid) return;
-  
+
   gamesGrid.innerHTML = "";
 
   gamesToRender.forEach((game, index) => {
@@ -599,7 +599,7 @@ function setupEnhancedSearch() {
   const searchInput = document.getElementById("searchInput");
   const gamesGrid = document.getElementById("gamesGrid");
   const noResults = document.getElementById("noResults"); // Reference the new ID from index.html
-  
+
   if (!searchInput || !gamesGrid) return;
 
   searchInput.addEventListener("input", (e) => {
@@ -670,31 +670,34 @@ document.addEventListener("DOMContentLoaded", () => {
       once: true,
     });
   }
-  
+
   // Initialize theme FIRST (before anything else renders)
   initializeTheme();
-  
+
   // Setup theme toggle
   setupThemeToggle();
-  
+
   // Setup system theme listener
   setupSystemThemeListener();
-  
+
   // Render games
   renderGames();
-  
+
   // Setup search
   setupEnhancedSearch();
-  
+
   // Create particles
   createParticles();
-  
+
   // Update footer year if element exists
   const footerYear = document.getElementById('footeryear');
   if (footerYear) {
     footerYear.textContent = new Date().getFullYear();
   }
-  
+
+  // Setup scroll to top
+  setupScrollToTop();
+
   console.log("✅ GameHub initialized successfully!");
   console.log(`📊 Total games loaded: ${games.length}`);
 });
@@ -772,10 +775,10 @@ function initializeGameStats() {
 function trackGamePlay(gameId) {
   const stats = JSON.parse(localStorage.getItem("gameStats") || "{}");
   const gameStat = stats[gameId] || { plays: 0, lastPlayed: null, totalTime: 0 };
-  
+
   gameStat.plays += 1;
   gameStat.lastPlayed = new Date().toISOString();
-  
+
   stats[gameId] = gameStat;
   localStorage.setItem("gameStats", JSON.stringify(stats));
 }
@@ -797,6 +800,30 @@ function getTopPlayedGames(limit = 5) {
       return { ...game, ...stat };
     })
     .filter(game => game !== undefined);
+}
+
+// ============================================
+// SCROLL TO TOP LOGIC
+// ============================================
+
+function setupScrollToTop() {
+  const scrollToTopBtn = document.getElementById("scrollToTop");
+  if (!scrollToTopBtn) return;
+
+  window.addEventListener("scroll", () => {
+    if (window.pageYOffset > 300) {
+      scrollToTopBtn.classList.add("visible");
+    } else {
+      scrollToTopBtn.classList.remove("visible");
+    }
+  });
+
+  scrollToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
 }
 
 // Update game card with play count
@@ -821,7 +848,7 @@ function filterGamesByCategory(category) {
     renderGames(games);
     return;
   }
-  
+
   const filteredGames = games.filter(game => game.category === category);
   renderGames(filteredGames);
 }
@@ -830,9 +857,9 @@ function filterGamesByCategory(category) {
 function createCategoryFilters() {
   const categories = getAllCategories();
   const categoryContainer = document.getElementById("categoryFilters");
-  
+
   if (!categoryContainer) return;
-  
+
   // Add "All" category
   const allButton = document.createElement("button");
   allButton.className = "category-btn active";
@@ -845,9 +872,9 @@ function createCategoryFilters() {
     });
     allButton.classList.add("active");
   };
-  
+
   categoryContainer.appendChild(allButton);
-  
+
   categories.forEach(category => {
     const button = document.createElement("button");
     button.className = "category-btn";
@@ -860,7 +887,7 @@ function createCategoryFilters() {
       });
       button.classList.add("active");
     };
-    
+
     categoryContainer.appendChild(button);
   });
 }
@@ -873,7 +900,7 @@ function createCategoryFilters() {
 function setupImprovedSearch() {
   const searchInput = document.getElementById("searchInput");
   const gamesGrid = document.getElementById("gamesGrid");
-  
+
   if (!searchInput || !gamesGrid) return;
 
   // Create search suggestions container
@@ -884,10 +911,10 @@ function setupImprovedSearch() {
 
   searchInput.addEventListener("input", (e) => {
     const searchTerm = e.target.value.toLowerCase().trim();
-    
+
     // Clear previous suggestions
     suggestionsContainer.innerHTML = "";
-    
+
     if (searchTerm.length > 0) {
       // Filter games for suggestions
       const suggestions = games.filter(
@@ -896,7 +923,7 @@ function setupImprovedSearch() {
           game.description.toLowerCase().includes(searchTerm) ||
           game.category.toLowerCase().includes(searchTerm)
       ).slice(0, 5); // Limit to 5 suggestions
-      
+
       if (suggestions.length > 0) {
         suggestions.forEach(suggestion => {
           const suggestionItem = document.createElement("div");
@@ -927,7 +954,7 @@ function setupImprovedSearch() {
       suggestionsContainer.style.display = "none";
     }
   });
-  
+
   // Hide suggestions when clicking outside
   document.addEventListener("click", (e) => {
     if (!searchInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
@@ -959,27 +986,27 @@ function initializeGameRatings() {
 function rateGame(gameId, rating) {
   const ratings = JSON.parse(localStorage.getItem("gameRatings") || "{}");
   const gameRating = ratings[gameId] || { average: 0, totalRatings: 0, userRating: null };
-  
+
   // Store user's rating
   const oldUserRating = gameRating.userRating || 0;
   gameRating.userRating = rating;
-  
+
   // Update average
   const totalRatings = gameRating.totalRatings;
   const currentAverage = gameRating.average;
-  
+
   // Remove old user rating from total
   const totalStars = (currentAverage * totalRatings) - oldUserRating;
-  
+
   // If this is a new rating, increment total count
   if (oldUserRating === 0) {
     gameRating.totalRatings = totalRatings + 1;
   }
-  
+
   // Add new rating
   const newTotalStars = totalStars + rating;
   gameRating.average = newTotalStars / gameRating.totalRatings;
-  
+
   ratings[gameId] = gameRating;
   localStorage.setItem("gameRatings", JSON.stringify(ratings));
 }
@@ -995,20 +1022,20 @@ function createStarRating(gameId, size = "small") {
   const rating = getGameRating(gameId);
   const container = document.createElement("div");
   container.className = `star-rating ${size}`;
-  
+
   // Create stars
   for (let i = 1; i <= 5; i++) {
     const star = document.createElement("span");
     star.className = "star";
     star.innerHTML = "★";
     star.dataset.rating = i;
-    
+
     if (i <= Math.floor(rating.average)) {
       star.classList.add("filled");
     } else if (i === Math.ceil(rating.average) && rating.average % 1 !== 0) {
       star.classList.add("half");
     }
-    
+
     // Add click event for user rating
     star.addEventListener("click", () => {
       rateGame(gameId, i);
@@ -1017,16 +1044,16 @@ function createStarRating(gameId, size = "small") {
       const newRating = createStarRating(gameId, size);
       parent.replaceChild(newRating, container);
     });
-    
+
     container.appendChild(star);
   }
-  
+
   // Add rating count
   const count = document.createElement("span");
   count.className = "rating-count";
   count.textContent = `(${rating.totalRatings})`;
   container.appendChild(count);
-  
+
   return container;
 }
 
@@ -1038,7 +1065,7 @@ function createStarRating(gameId, size = "small") {
 function renderGamesWithRatings(gamesToRender = games) {
   const gamesGrid = document.getElementById("gamesGrid");
   if (!gamesGrid) return;
-  
+
   gamesGrid.innerHTML = "";
 
   gamesToRender.forEach((game, index) => {
@@ -1067,7 +1094,7 @@ function renderGamesWithRatings(gamesToRender = games) {
     `;
 
     gamesGrid.appendChild(gameCard);
-    
+
     // Add rating after the card is added to DOM
     const ratingContainer = gameCard.querySelector(`#rating-${game.id}`);
     if (ratingContainer) {
@@ -1089,11 +1116,11 @@ function renderGamesWithRatings(gamesToRender = games) {
 // Add keyboard navigation for game cards
 function setupGameCardAccessibility() {
   const gameCards = document.querySelectorAll(".game-card");
-  
+
   gameCards.forEach(card => {
     // Make game cards focusable
     card.setAttribute("tabindex", "0");
-    
+
     // Add keyboard event listener
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -1150,7 +1177,7 @@ function playGame(gameFile) {
     recent = recent.slice(0, 5);
 
     localStorage.setItem("recentlyPlayed", JSON.stringify(recent));
-    
+
     // Track game statistics
     trackGamePlay(game.id);
 
@@ -1174,49 +1201,49 @@ document.addEventListener("DOMContentLoaded", () => {
       once: true,
     });
   }
-  
+
   // Initialize game statistics
   initializeGameStats();
-  
+
   // Initialize game ratings
   initializeGameRatings();
-  
+
   // Initialize theme FIRST (before anything else renders)
   initializeTheme();
-  
+
   // Setup theme toggle
   setupThemeToggle();
-  
+
   // Setup system theme listener
   setupSystemThemeListener();
-  
+
   // Render games with ratings
   renderGamesWithRatings();
-  
+
   // Setup improved search
   setupImprovedSearch();
-  
+
   // Create category filters
   createCategoryFilters();
-  
+
   // Create particles
   createParticles();
-  
+
   // Setup game card accessibility
   setupGameCardAccessibility();
-  
+
   // Add focus styles
   addFocusStyles();
-  
+
   // Update footer year if element exists
   const footerYear = document.getElementById('footeryear');
   if (footerYear) {
     footerYear.textContent = new Date().getFullYear();
   }
-  
+
   console.log("✅ GameHub initialized successfully!");
   console.log(`📊 Total games loaded: ${games.length}`);
-  
+
   // Log top played games
   const topGames = getTopPlayedGames(3);
   if (topGames.length > 0) {
