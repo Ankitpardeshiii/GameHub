@@ -94,73 +94,79 @@
     </div>
 
     <!-- Navbar -->
-    <nav
-        class="fixed top-0 w-full z-50 glass-nav backdrop-blur-lg bg-black/20 border-b border-white/10 animate__animated animate__fadeInDown">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center space-x-8">
+  <nav class="fixed top-0 w-full z-50 glass-nav backdrop-blur-lg bg-black/20 border-b border-white/10 animate__animated animate__fadeInDown">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
 
-                    <!-- ⭐ UPDATED CLICKABLE LOGO + TEXT ⭐ -->
-                    <a href="{% url 'home' %}" class="flex items-center space-x-2 cursor-pointer">
-                        <div
-                            class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-gamepad text-white text-sm"></i>
-                        </div>
-                        <span
-                            class="font-orbitron font-bold text-xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                            GameHub
+            <!-- Left: Logo + Links -->
+            <div class="flex items-center space-x-8">
+
+                <!-- Logo + Animated Text -->
+                <a href="#" class="flex items-center space-x-2 cursor-pointer">
+                    <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-gamepad text-white text-sm"></i>
+                    </div>
+                    <span class="font-orbitron font-bold text-xl bg-text animate-textBg">
+                        GameHub
+                    </span>
+                </a>
+
+                <!-- Desktop Links -->
+              <!-- Desktop Links -->
+<div class="hidden md:flex space-x-6">
+    <a href="#hero" class="nav-link font-orbitron font-bold text-gray-300 relative group">
+        Home
+        <span class="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+    </a>
+    <a href="#games" class="nav-link font-orbitron font-bold text-gray-300 relative group">
+        Games
+        <span class="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+    </a>
+    <a href="#reviews" class="nav-link font-orbitron font-bold text-gray-300 relative group">
+        Reviews
+        <span class="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+    </a>
+    <a href="#about" class="nav-link font-orbitron font-bold text-gray-300 relative group">
+        About
+        <span class="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+    </a>
+    <a href="leaderboard.html" class="nav-link font-orbitron font-bold text-gray-300 relative group">
+        Leaderboard
+        <span class="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+    </a>
+</div>
+            <!-- Right: Search + User Actions -->
+            <div class="flex items-center space-x-2 md:space-x-4">
+
+                <!-- Search -->
+                <div class="relative hidden sm:block">
+                    <input type="text" placeholder="Search games..." class="search-input pl-3 pr-10 py-1 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500" />
+                    <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+
+                <!-- User Actions -->
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    <a href="#" class="flex items-center space-x-2 group transition-all">
+                        <span class="hidden md:inline text-purple-500 font-bold font-rajdhani group-hover:scale-110 transition-transform">👋</span>
+                        <span class="hidden md:inline font-orbitron font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent text-sm lg:text-base">
+                            JohnDoe
                         </span>
                     </a>
-                    <!-- ⭐ END UPDATED PART ⭐ -->
 
-                    <div class="hidden md:flex space-x-6">
-                        <a href="#hero" class="nav-link">Home</a>
-                        <a href="#games" class="nav-link">Games</a>
-                        <a href="#reviews" class="nav-link">Reviews</a>
-                        <a href="#about" class="nav-link">About</a>
-                        <a href="{% url 'leaderboard' %}" class="nav-link">Leaderboard</a>
-                    </div>
+                 
+                    <a href="logout.html" class="neon-button secondary text-xs md:text-sm px-2 md:px-4">Logout</a>
                 </div>
 
-                <div class="flex items-center space-x-2 md:space-x-4">
-                    <div class="relative hidden sm:block">
-                        <input type="text" id="searchInput" placeholder="Search games..." class="search-input" />
-                        <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    </div>
-
-                    {% if user.is_authenticated %}
-                    <div class="flex items-center">
-                        <a href="{% url 'profile' %}" class="flex items-center space-x-2 group transition-all">
-                            <span
-                                class="hidden md:inline text-purple-500 font-bold font-rajdhani group-hover:scale-110 transition-transform">👋</span>
-                            <span
-                                class="hidden md:inline font-orbitron font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent text-sm lg:text-base">
-                                {{ user.first_name|default:user.username }}
-                            </span>
-                        </a>
-                        {% if user.is_staff %}
-                        <a href="{% url 'message_search' %}"
-                            class="neon-button primary text-xs md:text-sm px-2 md:px-4 ml-4"
-                            title="View user messages">Messages</a>
-                        {% endif %}
-                        <a href="{% url 'logout' %}"
-                            class="neon-button secondary text-xs md:text-sm px-2 md:px-4 ml-4">Logout</a>
-                    </div>
-                    {% else %}
-                    <a href="{% url 'login' %}" class="neon-button secondary text-xs md:text-sm px-2 md:px-4">Login</a>
-                    {% endif %}
-
-
-                    <button id="themeToggle" class="theme-toggle">
-                        <i class="
-                        "></i>
-                    </button>
-                </div>
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="theme-toggle ml-2">
+                    <i class="fas fa-moon text-gray-200"></i>
+                </button>
 
             </div>
-        </div>
-    </nav>
 
+        </div>
+    </div>
+</nav>
     <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center">
         <div class="container mx-auto px-4 text-center relative z-10">
