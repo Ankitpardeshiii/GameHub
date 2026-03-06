@@ -383,7 +383,16 @@ const games = [
     image: "/static/assets/Whake-a-mole.png",
     file: "/static/games/whack-a-mole.html",
     category: "arcade"
-  }
+  },
+
+  {
+    id: "mario-forever",
+    title: "Mario Forever",
+    description: "Run, jump, and collect coins in this fun platform adventure",
+    image: "/static/assets/Mario.png",   // Make sure the image exists in this path
+    file: "/static/games/Mario-Forever/index.html",   // Path to your HTML game file
+    category: "arcade"
+}
 ];
 
 // ============================================
