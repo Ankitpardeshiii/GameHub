@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import AboutPage from './pages/AboutPage';
 import GamesPage from './pages/GamesPage';
+import ProfilePage from './pages/ProfilePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ProtocolTerms from './pages/ProtocolTerms';
 import CookiePolicy from './pages/CookiePolicy';
@@ -53,7 +54,7 @@ const AppLayout = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/devlogs" element={<DevLogsPage />} />
-          <Route path="/profile" element={<div className="pt-32 text-center text-3xl font-orbitron text-purple-500">Profile Coming Soon...</div>} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </main>
 

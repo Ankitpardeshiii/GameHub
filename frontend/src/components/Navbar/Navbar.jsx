@@ -122,7 +122,12 @@ const Navbar = () => {
                                     {link.name}
                                 </Link>
                             ))}
-                            {!isAuthenticated && (
+                            {isAuthenticated ? (
+                                <div className="flex flex-col gap-4 pt-4 border-t border-white/10">
+                                    <Link to="/profile" onClick={() => setMobileMenuOpen(false)} className="text-center py-3 text-purple-400 font-orbitron text-xs uppercase tracking-widest border border-purple-500/20 rounded-xl">My Identity</Link>
+                                    <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }} className="text-center py-3 text-red-500 font-orbitron text-xs uppercase tracking-widest border border-red-500/20 rounded-xl">Terminate Session</button>
+                                </div>
+                            ) : (
                                 <div className="flex flex-col gap-4 pt-4 border-t border-white/10">
                                     <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="text-center py-3 text-gray-400 font-orbitron text-xs uppercase tracking-widest">Login</Link>
                                     <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="neon-btn neon-btn-primary text-center py-4">Join Now</Link>
