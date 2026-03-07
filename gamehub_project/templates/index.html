@@ -28,6 +28,24 @@
     <div id="network-status-banner">You are offline</div>
 
     <style>
+        .gamehub-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 1000;
+    font-size: 4rem; /* adjust as needed */
+    text-align: center;
+    background-image: url("../../gamehub_project/static/assets/TextBg.png");
+    background-size: 800% 800%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 10s ease infinite;
+    text-size-adjust: larger;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
         #network-status-banner {
             position: fixed;
             bottom: 20px;
@@ -171,12 +189,9 @@
     <section id="hero" class="relative min-h-screen flex items-center justify-center">
         <div class="container mx-auto px-4 text-center relative z-10">
             <div class="max-w-4xl mx-auto">
-                <h1 class="font-orbitron font-black text-6xl md:text-8xl mb-6 animate__animated animate__fadeInDown">
-                    <span
-                        class="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent glow-text">
-                        GameHub
-                    </span>
-                </h1>
+                <h1 class="gamehub-title">
+    GameHub
+</h1>
                 <p
                     class="font-rajdhani text-xl md:text-2xl mb-8 text-gray-300 animate__animated animate__fadeInUp animate__delay-1s">
                     Play. Compete. <span class="text-purple-400 font-semibold">Have Fun.</span>
