@@ -7,6 +7,8 @@ urlpatterns = [
     path('api/auth/register/', views.api_register, name='api_register'),
     path('api/auth/logout/', views.api_logout, name='api_logout'),
     path('api/auth/token/refresh/', views.api_token_refresh, name='api_token_refresh'),
+    path('api/auth/password-reset/', views.api_forgot_password, name='api_forgot_password'),
+    path('api/auth/password-reset-confirm/', views.api_reset_password, name='api_reset_password_confirm'),
 
     # Data Endpoints
     path('api/profile/', views.api_profile, name='api_profile'),

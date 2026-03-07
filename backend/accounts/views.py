@@ -9,6 +9,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Profile, GameScore, UserMessage
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import send_mail
+from django.conf import settings
 import json
 
 
@@ -116,6 +121,63 @@ def api_logout(request):
     # With JWT, logout is handled client-side by deleting the token.
     # Optionally blacklist the refresh token if blacklist app is enabled.
     return Response({'message': 'Logged out successfully.'})
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def api_forgot_password(request):
+    email = request.data.get('email', '').strip()
+    if not email:
+        return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    user = User.objects.filter(email__iexact=email).first()
+    if user:
+        token = default_token_generator.make_token(user)
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        
+        # In a real app, you'd point this to your frontend reset page
+        reset_url = f"{settings.CORS_ALLOWED_ORIGINS[0]}/reset-password/{uid}/{token}/"
+        
+        subject = "Password Reset Request - GameHub"
+        message = f"Hello {user.username},\n\nYou requested a password reset. Click the link below to set a new password:\n\n{reset_url}\n\nIf you didn't request this, please ignore this email."
+        
+        try:
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
+        except Exception as e:
+            return Response({'error': f'Failed to send email: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    # Return success message
+    response_data = {'message': 'If an account exists with this email, a reset link has been sent.'}
+    
+    # For easier testing in development, include the link in the response
+    if settings.DEBUG and user:
+        response_data['dev_reset_url'] = reset_url
+        
+    return Response(response_data)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def api_reset_password(request):
+    uidb64 = request.data.get('uid')
+    token = request.data.get('token')
+    new_password = request.data.get('password')
+
+    if not all([uidb64, token, new_password]):
+        return Response({'error': 'UID, token and password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user and default_token_generator.check_token(user, token):
+        user.set_password(new_password)
+        user.save()
+        return Response({'message': 'Password has been reset successfully.'})
+    else:
+        return Response({'error': 'Invalid or expired reset link.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])

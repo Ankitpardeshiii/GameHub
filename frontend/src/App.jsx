@@ -15,13 +15,15 @@ import CookiePolicy from './pages/CookiePolicy';
 import ContactPage from './pages/ContactPage';
 import FAQPage from './pages/FAQPage';
 import DevLogsPage from './pages/DevLogsPage';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import ScrollToTop from './components/ScrollToTop';
 import BackToTop from './components/BackToTop/BackToTop';
 
 const AppLayout = () => {
   const location = useLocation();
   const isPlaying = location.pathname.startsWith('/play/');
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+  const isAuthPage = ['/login', '/register', '/forgot-password', '/reset-password'].some(path => location.pathname.startsWith(path));
 
   return (
     <div className="min-h-screen relative text-white bg-[#050508]">
@@ -41,6 +43,8 @@ const AppLayout = () => {
           <Route path="/play/:gameId" element={<GamePlayPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:uid/:token" element={<ResetPassword />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/games" element={<GamesPage />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />

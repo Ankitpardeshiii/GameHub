@@ -119,3 +119,8 @@ CORS_ALLOW_HEADERS = [
     'content-type', 'dnt', 'origin', 'user-agent',
     'x-csrftoken', 'x-requested-with',
 ]
+# ============================================================
+# Email Settings (Development)
+# ============================================================
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'noreply@gamehub.cosmos'
