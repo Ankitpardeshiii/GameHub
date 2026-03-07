@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #7c3aed;
+  --color-secondary: #ec4899;
+  --font-orbitron: "Outfit", sans-serif;
+  --font-rajdhani: "Plus Jakarta Sans", sans-serif;
+}
+
+:root {
+  --bg-deep: #050508;
+  --primary: #7c3aed;
+  --secondary: #ec4899;
+}
+
+@layer base {
+  body {
+    @apply bg-[#050508] text-gray-200 min-h-screen antialiased;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl;
+  }
+
+  .neon-btn {
+    @apply px-6 py-2 rounded-lg font-bold uppercase transition-all duration-300;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  /* Manual CSS for complex animations/shadows to avoid Tailwind v4 parser issues */
+  .neon-btn-primary {
+    background-color: #7c3aed;
+    color: white;
+    box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+  }
+
+  .neon-btn-primary:hover {
+    box-shadow: 0 0 25px rgba(124, 58, 237, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .neon-btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 1px solid #7c3aed;
+  }
+
+  .neon-btn-secondary:hover {
+    background-color: rgba(124, 58, 237, 0.2);
+    transform: translateY(-2px);
+  }
+
+  @keyframes gradient-x {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient-x {
+    animation: gradient-x 3s ease infinite;
+    background-size: 200% 200%;
+  }
+
+  .scanline-effect {
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.1) 50%),
+      linear-gradient(90deg,
+        rgba(255, 0, 0, 0.03),
+        rgba(0, 255, 0, 0.01),
+        rgba(0, 0, 255, 0.03));
+    background-size: 100% 4px, 3px 100%;
+  }
+}
+
+/* ─── Custom Scrollbar — Cosmic Theme ─────────────────────────────── */
+
+/* Width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0a0a12;
+  border-left: 1px solid rgba(124, 58, 237, 0.05);
+}
+
+/* Thumb */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7c3aed, #ec4899);
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #9d5ff5, #f472b6);
+  box-shadow: 0 0 16px rgba(124, 58, 237, 0.8), 0 0 4px rgba(236, 72, 153, 0.6);
+}
+
+/* Corner */
+::-webkit-scrollbar-corner {
+  background: #050508;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #7c3aed #0a0a12;
+}

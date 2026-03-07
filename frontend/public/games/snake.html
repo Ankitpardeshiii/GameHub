@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Snake - GameHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="common-game.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #7c3aed, #ec4899);
+            --bg-dark: transparent;
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: #e2e8f0;
+            font-family: 'Rajdhani', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .board-container {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(124, 58, 237, 0.1);
+        }
+
+        #gameCanvas {
+            border-radius: 12px;
+            background: #07070a;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .control-btn {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover {
+            background: #7c3aed;
+            border-color: #7c3aed;
+            transform: scale(1.05);
+        }
+
+        .glow-text {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="game-wrapper animate__animated animate__fadeIn">
+        <header class="text-center mb-4">
+            <h1 class="text-4xl font-black font-orbitron tracking-tighter glow-text mb-2">NEON <span
+                    class="text-purple-500">SNAKE</span></h1>
+            <div class="flex gap-4 justify-center">
+                <div class="stat-card">
+                    <div class="text-[8px] font-orbitron font-bold text-gray-500 uppercase tracking-widest">Score</div>
+                    <div class="text-2xl font-orbitron font-black text-purple-500" id="score">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-[8px] font-orbitron font-bold text-gray-500 uppercase tracking-widest">High Score
+                    </div>
+                    <div class="text-2xl font-orbitron font-black text-blue-500" id="highScore">0</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="board-container">
+                <canvas id="gameCanvas" width="400" height="400"></canvas>
+            </div>
+
+            <div class="flex flex-col gap-8">
+                <!-- D-Pad -->
+                <div class="grid grid-cols-3 gap-2">
+                    <div></div>
+                    <button class="control-btn" onclick="changeDirection('up')"><i
+                            class="fas fa-chevron-up"></i></button>
+                    <div></div>
+                    <button class="control-btn" onclick="changeDirection('left')"><i
+                            class="fas fa-chevron-left"></i></button>
+                    <button class="control-btn bg-purple-600/20 border-purple-500/50" onclick="toggleGame()"
+                        id="playPauseBtn"><i class="fas fa-play"></i></button>
+                    <button class="control-btn" onclick="changeDirection('right')"><i
+                            class="fas fa-chevron-right"></i></button>
+                    <div></div>
+                    <button class="control-btn" onclick="changeDirection('down')"><i
+                            class="fas fa-chevron-down"></i></button>
+                    <div></div>
+                </div>
+
+                <div class="glass-ui max-w-xs">
+                    <h3 class="font-orbitron text-[10px] font-black uppercase tracking-[0.2em] text-purple-400 mb-4">
+                        Control Protocols</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-keyboard text-gray-600 text-[10px]"></i>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Arrow Keys /
+                                WASD</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-space-shuttle text-gray-600 text-[10px]"></i>
+                            <span class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Space to
+                                Pause</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/score-saver.js"></script>
+    <script src="../scripts/snake.js"></script>
+</body>
+
+</html>
