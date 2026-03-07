@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Whack - GameHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="common-game.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #7c3aed, #ec4899);
+            --bg-dark: transparent;
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: #e2e8f0;
+            font-family: 'Rajdhani', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .board-container {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(124, 58, 237, 0.1);
+        }
+
+        .mole-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .mole-hole {
+            position: relative;
+            aspect-ratio: 1;
+            background: #0a0a0f;
+            border: 2px solid rgba(124, 58, 237, 0.2);
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 120px;
+        }
+
+        .mole-hole:hover {
+            border-color: #7c3aed;
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+        }
+
+        .mole {
+            position: absolute;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 80%;
+            transition: bottom 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .mole.active {
+            bottom: 10%;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .glow-text {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+            color: white;
+        }
+
+        .game-over-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: #0a0a0f;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="game-wrapper animate__animated animate__fadeIn">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-black font-orbitron tracking-tighter glow-text mb-4 uppercase">NEON <span
+                    class="text-purple-500">WHACK</span></h1>
+            <div class="flex gap-4 justify-center">
+                <div class="stat-card">
+                    <div class="text-[8px] font-orbitron font-bold text-gray-500 uppercase tracking-widest">Points</div>
+                    <div class="text-2xl font-orbitron font-black text-purple-500" id="score">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-[8px] font-orbitron font-bold text-gray-500 uppercase tracking-widest">Time Buffer
+                    </div>
+                    <div class="text-2xl font-orbitron font-black text-blue-500" id="timeLeft">30</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-[8px] font-orbitron font-bold text-gray-500 uppercase tracking-widest">Record</div>
+                    <div class="text-2xl font-orbitron font-black text-pink-500" id="highScore">0</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="board-container">
+            <div class="mole-grid" id="moleGrid">
+                <!-- Generated Holes -->
+            </div>
+        </div>
+
+        <div class="flex gap-6 mt-8">
+            <button id="startBtn" class="neon-btn px-16 py-4 uppercase font-black text-xs tracking-[0.2em]">Start
+                Protocol</button>
+            <button id="resetBtn"
+                class="bg-white/5 border border-white/10 hover:border-white/30 text-gray-400 px-8 py-4 rounded-xl font-orbitron text-[10px] uppercase font-bold tracking-widest transition-all">Reboot</button>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="game-over-modal">
+        <div class="modal-content animate__animated animate__zoomIn">
+            <div class="text-5xl mb-4">👾</div>
+            <h2 class="text-2xl font-orbitron font-black text-white mb-2 uppercase">STALEMATE</h2>
+            <div class="py-6">
+                <p class="text-3xl font-orbitron font-black text-purple-500" id="finalScore">0</p>
+                <p class="text-[8px] font-orbitron font-bold text-gray-500 uppercase tracking-widest mt-1">Final
+                    Throughput</p>
+            </div>
+            <div id="newHighScoreMsg" class="mb-6 hidden">
+                <div class="text-green-500 font-orbitron text-[10px] font-black uppercase tracking-[0.2em]">NEW SYSTEM
+                    RECORD</div>
+            </div>
+            <button id="playAgainBtn" class="neon-btn w-full py-4 text-xs">RETRY MISSION</button>
+        </div>
+    </div>
+
+    <script src="../scripts/score-saver.js"></script>
+    <script src="../scripts/whack-a-mole.js"></script>
+</body>
+
+</html>

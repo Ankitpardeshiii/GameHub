@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brick Breaker - GameHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="common-game.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #7c3aed, #ec4899);
+            --bg-dark: transparent;
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: #e2e8f0;
+            font-family: 'Rajdhani', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .game-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .board-container {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(124, 58, 237, 0.1);
+        }
+
+        #gameCanvas {
+            border-radius: 12px;
+            background: #07070a;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 100%;
+            height: auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .glow-text {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+        }
+
+        .game-over-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: #0a0a0f;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="game-wrapper animate__animated animate__fadeIn">
+        <header class="text-center mb-4">
+            <h1 class="text-4xl font-black font-orbitron tracking-tighter glow-text mb-2 uppercase">BRICK <span
+                    class="text-purple-500">BREAKER</span></h1>
+            <div class="flex gap-4 justify-center">
+                <div class="stat-card">
+                    <div class="text-[8px] font-orbitron font-bold text-gray-400 uppercase tracking-widest">Score</div>
+                    <div class="text-xl font-orbitron font-black text-purple-500" id="score">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-[8px] font-orbitron font-bold text-gray-400 uppercase tracking-widest">Level</div>
+                    <div class="text-xl font-orbitron font-black text-blue-500" id="level">1</div>
+                </div>
+                <div class="stat-card">
+                    <div class="text-[8px] font-orbitron font-bold text-gray-400 uppercase tracking-widest">Lives</div>
+                    <div class="text-xl font-orbitron font-black text-pink-500" id="lives">3</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="board-container">
+            <canvas id="gameCanvas" width="800" height="500"></canvas>
+        </div>
+
+        <div class="flex gap-4 mt-4">
+            <button id="startBtn" class="neon-btn px-12 py-3">Start Engine</button>
+            <button id="resetBtn"
+                class="bg-white/5 border border-white/10 hover:border-white/30 text-gray-400 px-8 py-3 rounded-lg font-orbitron text-[10px] font-bold uppercase tracking-widest transition-all">Restart</button>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="game-over-modal">
+        <div class="modal-content animate__animated animate__zoomIn">
+            <div id="modalIcon" class="text-5xl mb-4">🎉</div>
+            <h2 id="modalTitle" class="text-2xl font-orbitron font-black text-white mb-2 uppercase">TERMINATED</h2>
+            <p id="modalText" class="text-gray-400 font-rajdhani mb-8 uppercase tracking-widest text-xs font-bold">Great
+                job breaking those bricks!</p>
+            <button class="neon-btn w-full py-4" onclick="location.reload()">Reboot Project</button>
+        </div>
+    </div>
+
+    <script src="../scripts/score-saver.js"></script>
+    <script src="../scripts/breakout.js"></script>
+</body>
+
+</html>

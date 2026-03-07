@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simon Says - GameHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="common-game.css">
+  <style>
+    body {
+      background: var(--bg-deep);
+      color: white;
+      overflow-y: auto !important;
+    }
+
+    .simon-board {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .simon-btn {
+      aspect-ratio: 1;
+      border-radius: 20px;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 4px solid rgba(255, 255, 255, 0.05);
+      opacity: 0.6;
+      cursor: pointer;
+    }
+
+    .simon-btn:hover {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
+
+    .simon-btn.active {
+      opacity: 1;
+      transform: scale(0.98);
+      box-shadow: 0 0 40px currentColor;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      min-width: 100px;
+    }
+  </style>
+</head>
+
+<body class="game-wrapper">
+  <div class="bg-glow"></div>
+
+  <header class="text-center mb-8">
+    <h1 class="text-4xl font-black font-orbitron tracking-tighter glow-text mb-4 uppercase">SIMON <span
+        class="text-purple-500">SAYS</span></h1>
+    <div class="flex gap-4 justify-center">
+      <div class="stat-card">
+        <div class="text-[8px] font-orbitron font-bold text-gray-400 uppercase tracking-widest">Level</div>
+        <div class="text-2xl font-orbitron font-black text-purple-500" id="level">1</div>
+      </div>
+      <div class="stat-card">
+        <div class="text-[8px] font-orbitron font-bold text-gray-400 uppercase tracking-widest">Record</div>
+        <div class="text-2xl font-orbitron font-black text-blue-500" id="highScore">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="text-[8px] font-orbitron font-bold text-gray-400 uppercase tracking-widest">Status</div>
+        <div class="text-xs font-orbitron font-black text-pink-500 uppercase mt-1" id="gameStatus">Ready</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-col lg:flex-row items-center gap-12 max-w-5xl w-full">
+    <div class="glass-ui p-10 rounded-[32px] w-full max-w-md">
+      <div class="simon-board">
+        <button id="btn-0" class="simon-btn bg-red-500 text-red-400" onclick="playerInput(0)"></button>
+        <button id="btn-1" class="simon-btn bg-blue-500 text-blue-400" onclick="playerInput(1)"></button>
+        <button id="btn-2" class="simon-btn bg-green-500 text-green-400" onclick="playerInput(2)"></button>
+        <button id="btn-3" class="simon-btn bg-yellow-500 text-yellow-400" onclick="playerInput(3)"></button>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-6 w-full max-w-sm">
+      <div id="gameResult" class="hidden animate__animated animate__pulse">
+        <div class="bg-red-500/10 border border-red-500/20 p-4 rounded-xl text-center">
+          <span id="resultText" class="text-red-500 font-orbitron text-xs font-bold uppercase tracking-widest"></span>
+        </div>
+      </div>
+
+      <div class="glass-ui">
+        <h3 class="font-orbitron text-[10px] font-black uppercase tracking-[0.2em] text-purple-400 mb-4">Neural Training
+          Protocol</h3>
+        <p class="text-[12px] text-gray-400 font-rajdhani leading-relaxed mb-6">
+          Observe the chromatic pulse sequence and replicate precisely. The complexity matrix increases with each
+          successful cycle.
+        </p>
+        <div class="flex gap-4">
+          <button id="startBtn" onclick="startGame()" class="neon-btn flex-1">Start Protocol</button>
+          <button onclick="resetGame()"
+            class="bg-white/5 border border-white/10 text-gray-400 px-6 py-3 rounded-xl font-orbitron text-[10px] uppercase font-bold tracking-widest hover:bg-white/10 transition-all">Reboot</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/simon.js"></script>
+</body>
+
+</html>

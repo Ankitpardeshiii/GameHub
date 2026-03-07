@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dash X - GameHub</title>
+  <link rel="stylesheet" href="../common-game.css">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --primary: #00e5ff;
+    }
+
+    body {
+      overflow: hidden;
+      background: #050508;
+    }
+
+    #game {
+      background: #050508;
+    }
+
+    /* Adjusted HUD to avoid top-bar overlap */
+    #hud {
+      top: 80px !important;
+      left: 20px !important;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 15px;
+      border-radius: 12px;
+      border-left: 3px solid var(--primary);
+      z-index: 20;
+    }
+
+    #hudText {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    #pauseBtn {
+      position: fixed;
+      top: 80px !important;
+      right: 20px !important;
+      background: var(--primary) !important;
+      color: black !important;
+      font-family: 'Orbitron', sans-serif;
+      border-radius: 12px !important;
+      padding: 8px 14px !important;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 30;
+    }
+
+    #startScreen,
+    #gameOver,
+    #shop {
+      background: rgba(5, 5, 8, 0.95) !important;
+      backdrop-filter: blur(10px);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .instructions {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 16px;
+      margin: 20px 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      max-width: 400px;
+    }
+
+    .instructions p {
+      color: var(--primary);
+      font-weight: 900;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .instructions ul {
+      list-style: none;
+      text-align: left;
+    }
+
+    .instructions li {
+      margin-bottom: 8px;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    #startScreen button,
+    #gameOver button,
+    #shop button {
+      background: var(--primary) !important;
+      font-family: 'Orbitron', sans-serif !important;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 15px 35px !important;
+      border-radius: 12px !important;
+      border: none;
+      color: black;
+      font-weight: 900;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    #startScreen button:hover,
+    #gameOver button:hover,
+    #shop button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px var(--primary);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="startScreen">
+    <h1 class="glow-text" style="font-size: 4rem;">DASH <span style="color:white">X</span></h1>
+
+    <div class="instructions text-center">
+      <p>MISSION PROTOCOLS</p>
+      <ul class="inline-block text-left">
+        <li><span style="color:var(--primary)">A / D</span> • TRANSVERSE LEFT/RIGHT</li>
+        <li><span style="color:var(--primary)">SKIP</span> • AVOID FIELD OBSTACLES</li>
+        <li><span style="color:var(--primary)">COLLECT</span> • DATA COINS FOR UPGRADES</li>
+        <li><span style="color:var(--primary)">POWER</span> • ACTIVATE SHIELDS & MAGNETS</li>
+      </ul>
+    </div>
+
+    <button onclick="startGame()">Initiate Run</button>
+  </div>
+
+  <button id="pauseBtn" onclick="togglePause()">⏸</button>
+
+  <div id="game">
+    <div class="track"></div>
+    <div id="player"></div>
+
+    <div id="hud">
+      <div id="hudText" style="font-weight:900; font-size: 14px; color: var(--primary);">Score: 0 | Coins: 0 | Lives: 3
+      </div>
+
+      <div id="shieldBarContainer">
+        <div id="shieldBar"></div>
+      </div>
+      <div id="magnetBarContainer">
+        <div id="magnetBar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="gameOver">
+    <h2 class="glow-text" style="color:#ff0033; font-size: 3rem;">TERMINATED</h2>
+    <div style="margin: 20px 0;">
+      <p id="finalScore" style="font-size: 1.5rem; margin-bottom: 5px;"></p>
+      <p id="highScore" style="font-size: 0.9rem; color: #64748b;"></p>
+    </div>
+
+    <button onclick="restartGame()">Reboot Engine</button>
+    <button onclick="resetHighScore()"
+      style="background:transparent !important; color: #64748b; font-size: 10px; margin-top: 20px;">Wipe Local
+      Storage</button>
+  </div>
+
+
+  <button id="shopBtn" onclick="openShop()" class="neon-btn"
+    style="position:fixed; bottom:30px; right:30px; background: #00e5ff; box-shadow: 0 0 20px rgba(0,229,255,0.4);">
+    <i class="fas fa-shopping-cart"></i> Uplink Shop
+  </button>
+
+  <div id="shop">
+    <h2 class="glow-text" style="font-size: 3rem; margin-bottom: 10px;">UPGRADES</h2>
+
+    <p style="margin-bottom: 30px; font-size: 1.2rem;">CREDITS: <span id="shopCoins"
+        style="color:var(--primary); font-weight:900;">0</span></p>
+
+    <div style="display: flex; flex-direction: column; gap: 15px; width: 300px;">
+      <button onclick="buyShield()">SHIELD ACTIVATION (5)</button>
+      <button onclick="buyLife()">VITALITY PACK (10)</button>
+      <button onclick="buyMagnet()">FLUX MAGNET (7)</button>
+    </div>
+
+    <button onclick="closeShop()"
+      style="background:transparent !important; border: 1px solid rgba(255,255,255,0.2) !important; color: white !important; margin-top: 40px; font-size: 0.8rem; padding: 10px 20px !important;">Close
+      Interface</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
