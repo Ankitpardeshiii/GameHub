@@ -822,3 +822,57 @@ body,
 .pixel-btn:active {
     transform: scale(0.98);
 }
+/* =====================
+   SCROLL TO TOP BUTTON
+   ===================== */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 900;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 25px var(--shadow-color);
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-top-btn:hover {
+    background: linear-gradient(45deg, var(--primary-purple), var(--primary-pink));
+    color: #fff;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 15px 30px rgba(139, 92, 246, 0.4);
+}
+
+.scroll-top-btn i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.scroll-top-btn:hover i {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .scroll-top-btn {
+        bottom: 85px; /* Offset from feedback button on mobile */
+        right: 16px;
+        width: 48px;
+        height: 48px;
+    }
+}
