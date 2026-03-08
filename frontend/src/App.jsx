@@ -9,6 +9,13 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import AboutPage from './pages/AboutPage';
 import GamesPage from './pages/GamesPage';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import ProtocolTerms from './pages/ProtocolTerms';
+import CookiePolicy from './pages/CookiePolicy';
+import ContactPage from './pages/ContactPage';
+import FAQPage from './pages/FAQPage';
+import DevLogsPage from './pages/DevLogsPage';
+import ScrollToTop from './components/ScrollToTop';
 import BackToTop from './components/BackToTop/BackToTop';
 
 const AppLayout = () => {
@@ -18,6 +25,7 @@ const AppLayout = () => {
 
   return (
     <div className="min-h-screen relative text-white bg-[#050508]">
+      <ScrollToTop />
       {/* Animated Static Background Overlay */}
       <div className="fixed inset-0 z-[-1] pointer-events-none">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
@@ -35,6 +43,12 @@ const AppLayout = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/games" element={<GamesPage />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<ProtocolTerms />} />
+          <Route path="/cookies" element={<CookiePolicy />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/devlogs" element={<DevLogsPage />} />
           <Route path="/profile" element={<div className="pt-32 text-center text-3xl font-orbitron text-purple-500">Profile Coming Soon...</div>} />
         </Routes>
       </main>

